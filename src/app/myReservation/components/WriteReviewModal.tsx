@@ -6,7 +6,7 @@ import CustomButton from '@/components/CustomButton';
 import { ChangeEvent, SetStateAction, useState } from 'react';
 import { Reservation } from '@/lib/types';
 import StarRating from '../../../components/rating/StarRating';
-import FormattedDate from '@/utils/formattedDate';
+import { formattedDate } from '@/utils/formattedDate';
 import useWriteReview from '@/hooks/useWriteReview';
 
 interface Props {
@@ -22,13 +22,6 @@ export default function WriteReviewModal({
   setShowModal,
   setShowToast,
 }: Props) {
-  const submitButton: React.CSSProperties = {
-    width: '100%',
-    height: '56px',
-    fontWeight: '700',
-    color: '#fff',
-  };
-
   const [rating, setRating] = useState(1);
   const [isValue, setIsValue] = useState('');
   const [imageSrcMap, setImageSrcMap] = useState<Record<string, string>>({});
@@ -92,7 +85,7 @@ export default function WriteReviewModal({
             <div className={styles.top}>
               <p className={styles.title}>{activity?.title}</p>
               <p className={styles.date}>
-                {FormattedDate(date!)}
+                {formattedDate(date!)}
                 <span> · </span>
                 {isReviewData?.startTime} - {isReviewData?.endTime}
                 <span> · </span>
@@ -116,7 +109,7 @@ export default function WriteReviewModal({
             type='button'
             fontSize='sm'
             variant='black'
-            style={submitButton}
+            style={{ width: '100%', padding: '15px 0' }}
             onClick={handleWriteReview}
             disabled={isValue === ''}
           >
